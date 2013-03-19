@@ -5,6 +5,7 @@
 #include <map>
 #include <functional>
 
+
 class Board
 {
  public:
@@ -31,19 +32,23 @@ class Board
   /** Generate potential moves and returns new boards
    * Key=tile, Value=Ptr to corresponding Board */
   std::map<int, Board*> potentialMoves(); 
+  
+  
+  Board* NewBoard(int);
 
   /** Returns true if the board is solved, false otherwise */
   bool solved();
 
   // Operators
   friend std::ostream& operator<<(std::ostream &os, const Board &b);
+  	
   bool operator==(const Board& rhs) const;
   bool operator<(const Board& rhs) const;
   bool operator!=(const Board& rhs) const;
   
   // Accessors
-  int* getTiles();
-  int getSize();
+  int* getTiles() const;
+  int getSize() const;
   // Add any accessors
 
 
