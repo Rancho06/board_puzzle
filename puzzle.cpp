@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
   Board b(size,initMoves,seed);
 
   //**** Implement the gameplay here
+  
   int tile;
   cout<<b;
   while(!b.solved()){
