@@ -23,12 +23,14 @@ int main(int argc, char *argv[])
   Board b(size,initMoves,seed);
 
   //**** Implement the gameplay here
-
-
-
-
-
-
+  int tile;
+  cout<<b;
+  while(!b.solved()){
+		cout<<"Enter tile number to move: ";
+		cin>>tile;
+		b.move(tile);
+		cout<<b;
+	}
 
   return 0;
 }
