@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-  if(argc < 3){
+  if(argc < 4){
     cerr << "Usage: ./puzzle size initMoves seed" << endl;
     return 1;
   }
@@ -37,10 +37,12 @@ int main(int argc, char *argv[])
 			step=ps.run(mh);
 			list=ps.getlist();
 			cout<<endl<<"Try this sequence: ";
+			cout<<"size: "<<list->size();
 			for(int i=0;i<step;i++){
 				cout<<" "<<list->at(step-1-i);
 			}
-			cout<<endl<<"(Expansions = "<<ps.getNumExpansions()<<")\n\n";
+			cout<<endl<<"(Expansions = "<<ps.getNumExpansions()<<")\n";
+			cout<<b;
 		}
 		else{
 			b.move(tile);

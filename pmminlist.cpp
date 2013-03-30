@@ -33,6 +33,7 @@ void PMMinList::push(PuzzleMove* pm)
   	for(it= slist_.begin();it!=slist_.end();++it){
   		if(*pm<*(*it))
   			slist_.insert(it,pm);
+  		return;
   	}
  	}
   //---- Add your implementation to iterate through the list

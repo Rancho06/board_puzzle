@@ -21,10 +21,12 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   
   PuzzleMove* pm=new PuzzleMove(b_);
   openlist.push(pm);
+  closedlist.insert(pm->b_);
+  expansions_++;
   while(!openlist.empty()){
   	PuzzleMove* move=openlist.top();
   	openlist.pop();
-  	closedlist.insert(move->b_);
+  	//closedlist.insert(move->b_);
   	garbage.push_back(move);
   	if(move->b_->solved()){
   		//trace
@@ -44,6 +46,7 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   		if(closedlist.find(pm2->b_)==closedlist.end()){
   			pm2->h_=ph->compute(pm2->b_->getTiles(),pm2->b_->getSize());
   			openlist.push(pm2);
+  			closedlist.insert(pm2->b_);
   			expansions_++;
   		}
   		else {delete pm2;}
