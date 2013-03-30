@@ -17,7 +17,6 @@ PuzzleMove::PuzzleMove(int tile, Board *b, PuzzleMove *parent){
 }
 
 PuzzleMove::~PuzzleMove(){
-	delete b_;
 
 }
 

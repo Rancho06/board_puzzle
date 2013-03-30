@@ -28,7 +28,7 @@ class PuzzleSolver
   int run(PuzzleHeuristic *ph);
 
   //**** Return the solution List
- 	MyList<int> getlist();
+ 	MyList<int>* getlist();
 
   // Return how many expansions were performed in the search
   int getNumExpansions();

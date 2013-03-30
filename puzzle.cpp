@@ -26,12 +26,27 @@ int main(int argc, char *argv[])
   
   int tile;
   cout<<b;
+  ManhattanHeuristic* mh=new ManhattanHeuristic;
   while(!b.solved()){
-		cout<<"Enter tile number to move: ";
+		cout<<"Enter tile number to move or -1 for a cheat: ";
 		cin>>tile;
-		b.move(tile);
-		cout<<b;
+		if(tile==-1){
+			int step;
+			MyList<int>* list;
+			PuzzleSolver ps(b);
+			step=ps.run(mh);
+			list=ps.getlist();
+			cout<<endl<<"Try this sequence: ";
+			for(int i=0;i<step;i++){
+				cout<<" "<<list->at(step-1-i);
+			}
+			cout<<endl<<"(Expansions = "<<ps.getNumExpansions()<<")\n\n";
+		}
+		else{
+			b.move(tile);
+			cout<<b;
+		}
 	}
-
+	delete mh;
   return 0;
 }

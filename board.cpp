@@ -66,8 +66,7 @@ Board::Board(int size, int numInitMoves, int seed )
 /** Default constructor. provide documentation here */
 Board::Board()
 {
-  size_=16;
-  tiles_=new int[size_];
+ 
 }
 
 /** Default destructor. provide documentation here */
@@ -127,9 +126,9 @@ void Board::move(int tile){
 	tiles_[tileloc]=0;
 }
 
-Board* Board::NewBoard(int loc){
+Board* Board::NewBoard(int tile){
 	Board* bd=new Board(tiles_,size_);
-	bd->move(loc);
+	bd->move(tile);
 	return bd;
 }
 

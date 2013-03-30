@@ -7,8 +7,7 @@
 
 using namespace std;
 
-PuzzleSolver::PuzzleSolver(const Board &b){
-	b_=b;
+PuzzleSolver::PuzzleSolver(const Board &b):b_(b){
 	expansions_=0;
 }
 
@@ -19,6 +18,7 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
 	BoardSet closedlist;
   PMMinList openlist;
   vector<PuzzleMove*> garbage;
+  
   PuzzleMove* pm=new PuzzleMove(b_);
   openlist.push(pm);
   while(!openlist.empty()){
@@ -29,10 +29,11 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   	if(move->b_->solved()){
   		//trace
   		do{
+  			
   			solutionlist.push_back(move->tileMove_);
   			move=move->prev_;
   		}
-  		while(move!=NULL);
+  		while(move->prev_!=NULL);
   		
   		break;
   	}
@@ -45,7 +46,7 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   			openlist.push(pm2);
   			expansions_++;
   		}
-  		else delete pm2;
+  		else {delete pm2;}
   	}
   }
   vector<PuzzleMove*>::iterator it;
@@ -66,8 +67,8 @@ int PuzzleSolver::getNumExpansions()
   return expansions_;
 }
 
-MyList<int> PuzzleSolver::getlist(){
-	return solutionlist;
+MyList<int>* PuzzleSolver::getlist(){
+	return &solutionlist;
 }
 
 
