@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
 
   //**** Implement the gameplay here
   
+  
   int tile;
   cout<<b;
   ManhattanHeuristic* mh=new ManhattanHeuristic;
@@ -37,7 +38,7 @@ int main(int argc, char *argv[])
 			step=ps.run(mh);
 			list=ps.getlist();
 			cout<<endl<<"Try this sequence: ";
-			cout<<"size: "<<list->size();
+			//cout<<"size: "<<list->size();
 			for(int i=0;i<step;i++){
 				cout<<" "<<list->at(step-1-i);
 			}
