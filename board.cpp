@@ -75,6 +75,7 @@ Board::~Board()
  	delete[] tiles_;
 }
 
+/** Compare if one board is smaller than the other*/
 bool Board::operator<(const Board& rhs) const
 {
   if(size_ < rhs.size_){
@@ -126,8 +127,9 @@ void Board::move(int tile){
 	tiles_[tileloc]=0;
 }
 
+/** create a new board based on the potential move and return a pointer to that board.*/
 Board* Board::NewBoard(int tile){
-	Board* bd=new Board(tiles_,size_);
+	Board* bd=new Board(*this);
 	bd->move(tile);
 	return bd;
 }
@@ -159,10 +161,13 @@ bool Board::solved(){
 	return true;
 }
 
-// Operators
+/** Operators<<to output the entire board to the screen*/
 std::ostream& operator<<(std::ostream &os, const Board &b){
-	os<<left;
+	/**using a loop to determine the field width(setw)*/
 	int N=2;
+	while(pow(10,N-1)<=b.getSize()){
+		N++;
+	}
   	for(int i=0;i<b.getSize();i++){
   		if(i%(int)sqrt(b.getSize())==0) os<<endl;
 		if(b.getTiles()[i]==0) os<<setw(N)<<" ";
@@ -186,16 +191,19 @@ bool Board::operator!=(const Board& rhs) const{
   	}
   	return val;
 }
-  
+
+/** check if the two boards are exactly the same, which means every place has the same value*/  
 bool Board::operator==(const Board& rhs) const{
-	return !(operator!=(rhs));
+	return !(this->operator!=(rhs));
 }
 
-// Accessors
+/** Accessors*/
+/** return the pointer to the array of tiles of the board*/
 int* Board::getTiles() const{
 	return tiles_;
 }
 
+/** return the size of the array of the board*/
 int Board::getSize() const{
 	return size_;
 }

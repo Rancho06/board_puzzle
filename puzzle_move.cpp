@@ -34,6 +34,7 @@ bool PuzzleMove::operator<(const PuzzleMove& p) const
   }
 }
 
+//Compare to PuzzleMoves based on f distance
 bool PuzzleMove::operator>(const PuzzleMove& p) const
 {
   if( (g_ + h_) > (p.g_ + p.h_) ){
@@ -48,6 +49,7 @@ bool PuzzleMove::operator>(const PuzzleMove& p) const
   
 }
 
+//Compare if it's equal to puzzle moves based on f distance
 bool PuzzleMove::operator==(const PuzzleMove& p) const{
 	if((g_==p.g_)&&(h_==p.h_))
 		return true;

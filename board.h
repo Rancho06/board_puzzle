@@ -5,7 +5,11 @@
 #include <map>
 #include <functional>
 
-
+/** Board Class is to create the board and do the basic operations to the board
+ * such as move a tile or check whether the board is solved or compare the two boards 
+ * using ==,<, or >.
+   
+*/
 class Board
 {
  public:
@@ -33,17 +37,22 @@ class Board
    * Key=tile, Value=Ptr to corresponding Board */
   std::map<int, Board*> potentialMoves(); 
   
-  
+  /** used in potentialmove function. to create a new board based on our potential move.*/
   Board* NewBoard(int);
 
   /** Returns true if the board is solved, false otherwise */
   bool solved();
 
-  // Operators
+  /** Operators<< can output a Board object on the screen directly using friend connection*/
   friend std::ostream& operator<<(std::ostream &os, const Board &b);
-  	
+  
+  /** the operator== to compare the two boards.*/	
   bool operator==(const Board& rhs) const;
+  
+  /** the operator< to compare the two boards.*/
   bool operator<(const Board& rhs) const;
+  
+  /** the operator!= to compare the two boards.*/
   bool operator!=(const Board& rhs) const;
   
   // Accessors
@@ -59,10 +68,13 @@ class Board
 
 };
 
-// Leave this alone and don't touch it!
+/** This is used to order the BoardSet class*/
 struct BoardLessThan : 
   public std::binary_function<const Board*, const Board*,bool>
 {
+/** create a new operator to compare the two boards 
+ *given the "<" operator we already defined
+*/
   bool operator()(const Board *b1, const Board *b2) const
   {
     return *b1 < *b2;

@@ -23,6 +23,9 @@ class PMMinList
   void pop();
   /** Returns the PuzzleMove with the lowest score */
   PuzzleMove* top();
+  //std::list<PuzzleMove*>::iterator begin();
+  //std::list<PuzzleMove*>::iterator end();
+  //std::list<PuzzleMove*>::iterator erase(std::list<PuzzleMove*>::iterator it);
  private:
   /** the sorted list */
   std::list<PuzzleMove*> slist_;

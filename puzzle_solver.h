@@ -9,29 +9,35 @@
 #include "puzzle_heur.h"
 #include "mylist.h"
 
+/**This class combines other classes together to solve the problem
+*/
 class PuzzleSolver
 {
  public:
-  //*** Typedef for the closed-list set.  Declare your closed list variable as
-  //***   BoardSet closedlist; 
-  //*** when you write your code for the run() funciton
+  /** Typedef for the closed-list set.  Declare your closed list variable as
+   *   BoardSet closedlist; 
+   * when you write your code for the run() funciton
+  */
   typedef std::set<Board *, BoardLessThan> BoardSet;
 
-  // Constructor (makes a copy of the Board and stores it in _b
+  /// Constructor (makes a copy of the Board and stores it in _b
   PuzzleSolver(const Board &b);
 
-  // Destructor
+  /// Destructor
   ~PuzzleSolver();
 
-  // Run the A* search returning -1 if no solution exists or
-  //  the number of moves in the solution
+  /** Run the A* search returning -1 if no solution exists or
+   *  the number of moves in the solution
+  */
   int run(PuzzleHeuristic *ph);
 
-  //**** Return the solution List
- 	MyList<int>* getlist();
+  /** Return the solution List */
+  	MyList<int>* getlist();
+  
 
-  // Return how many expansions were performed in the search
-  int getNumExpansions();
+  /** Return how many expansions were performed in the search */
+   int getNumExpansions();
+  
 
  private:
   Board b_;
