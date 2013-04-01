@@ -72,23 +72,23 @@ Board::Board()
 /** Default destructor. provide documentation here */
 Board::~Board()
 {
- 	delete[] tiles_;
+  delete[] tiles_;	
 }
 
 /** Compare if one board is smaller than the other*/
 bool Board::operator<(const Board& rhs) const
 {
-  if(size_ < rhs.size_){
+  if(size_ < rhs.getSize()){
     return true;
   }
   bool val = false;
   for(int i=0; i < size_; i++){
-    if(tiles_[i] < rhs.tiles_[i]){
+    if(tiles_[i] < rhs.getTiles()[i]){
        //val = true;
        //break;
        return true;
      }
-     else if(tiles_[i] > rhs.tiles_[i]){
+     else if(tiles_[i] > rhs.getTiles()[i]){
        //break;
        return false;
      }
@@ -144,10 +144,10 @@ std::map<int, Board*> Board::potentialMoves(){
 	for(int i=0;i<size_;i++){
 		if(tiles_[i]==0) blankloc=i;
 	}
-	if(blankloc/dim>0) list[tiles_[blankloc-dim]]=NewBoard(tiles_[blankloc-dim]);
-	if(blankloc/dim<(dim-1)) list[tiles_[blankloc+dim]]=NewBoard(tiles_[blankloc+dim]);
-	if(blankloc%dim>0) list[tiles_[blankloc-1]]=NewBoard(tiles_[blankloc-1]);
-	if(blankloc%dim<(dim-1)) list[tiles_[blankloc+1]]=NewBoard(tiles_[blankloc+1]);
+	if(blankloc/dim>0) list[tiles_[blankloc-dim]]=this->NewBoard(tiles_[blankloc-dim]);
+	if(blankloc/dim<(dim-1)) list[tiles_[blankloc+dim]]=this->NewBoard(tiles_[blankloc+dim]);
+	if(blankloc%dim>0) list[tiles_[blankloc-1]]=this->NewBoard(tiles_[blankloc-1]);
+	if(blankloc%dim<(dim-1)) list[tiles_[blankloc+1]]=this->NewBoard(tiles_[blankloc+1]);
 	return list;
 }
 
@@ -178,16 +178,14 @@ std::ostream& operator<<(std::ostream &os, const Board &b){
 }
   
 bool Board::operator!=(const Board& rhs) const{
-	if(size_ != rhs.size_){
+	if(size_ != rhs.getSize()){
     	return true;
   	}
   	bool val = false;
   	for(int i=0; i < size_; i++){
-    	if(tiles_[i] != rhs.tiles_[i]){
-       	//val = true;
-       	//break;
-       	return true;
-     	}
+    		if(tiles_[i] != rhs.getTiles()[i]){
+       			return true;
+     		}
   	}
   	return val;
 }

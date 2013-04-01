@@ -23,7 +23,6 @@ int main(int argc, char *argv[])
   	size = atoi(argv[1]);
   	initMoves = atoi(argv[2]);
   	seed = atoi(argv[3]);
-
   	Board b(size,initMoves,seed);  
   
   	int tile;
@@ -37,6 +36,7 @@ int main(int argc, char *argv[])
 			cout<<"Enter tile number to move or -1 for a cheat: ";
 			cin>>tile;
 			if(!cin){
+				cout<<"What you entered is not an integer!\n";
 				cin.clear();
 				cin.ignore(10000,'\n');
 				continue;
@@ -66,11 +66,21 @@ int main(int argc, char *argv[])
 		 * if the tile can not be moved, we print a error message and continue the game
 		*/
 		else{
-			if(b.potentialMoves().find(tile)!=b.potentialMoves().end()){
+			std::map<int,Board*> plist=b.potentialMoves();
+			
+			if( plist.find(tile) != plist.end()){
 				b.move(tile);
 				cout<<b;
+				std::map<int,Board*>::iterator it;
+				for(it=plist.begin();it!=plist.end();it++){
+					delete it->second;
+				}
 			}
 			else{
+				std::map<int,Board*>::iterator it;
+				for(it=plist.begin();it!=plist.end();it++){
+					delete it->second;
+				}
 				cout<<"The tile you entered can not be moved. Please choose another tile.\n\n";
 				continue;
 			}

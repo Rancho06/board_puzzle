@@ -30,6 +30,7 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   	expansions_++;
   	while(!openlist.empty()){
   		PuzzleMove* move=openlist.top();
+  		
   		openlist.pop();
   		garbage.push_back(move);
   		if(move->b_->solved()){
@@ -44,33 +45,24 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   			break;
   		}
   		std::map<int, Board*> pmove=move->b_->potentialMoves();
+  		
   		std::map<int, Board*>::iterator it;
   		for(it=pmove.begin();it!=pmove.end();++it){
-  		
+  			//cout<<it->first<<endl<<*(it->second);
   			BoardSet::iterator it1;
   			bool exist=0;
   			for(it1=closedlist.begin();it1!=closedlist.end();it1++){
-  				if(*(*it1)==*(it->second)) exist=1;
+  				if(*(*it1)==*(it->second)){
+  					exist=1;
+  				}
   				
   			}
   			if(!exist){
   				
-  				PuzzleMove* pm2=new PuzzleMove(it->first,it->second,move);
-  				pm2->h_=ph->compute(pm2->b_->getTiles(),pm2->b_->getSize());
-  				/*std::list<PuzzleMove*>::iterator it2;
-  				for(it2=openlist.begin();it2!=openlist.end();it2++){
-  				
-  					if(*(pm2->b_)==*((*it2)->b_)){
-  						cout<<"2";
-  						if((*pm2)<(*(*it2))){
-  							openlist.erase(it2);
-  							it2--;
-  							expansions_--;
-  						}
-  					}
-  				}*/
-  				openlist.push(pm2);
-  				closedlist.insert(pm2->b_);
+  				pm=new PuzzleMove(it->first,it->second,move);
+  				pm->h_=ph->compute(pm->b_->getTiles(),pm->b_->getSize());
+  				openlist.push(pm);
+  				closedlist.insert(pm->b_);
   				expansions_++;	
   			}
   		}
@@ -84,7 +76,7 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
  	
  	while(!openlist.empty()){
  		//delete[] openlist.top()->b_->getTiles();
- 		//delete openlist.top()->b_;
+ 		delete openlist.top()->b_;
  		delete openlist.top();
  		openlist.pop();
  	}
