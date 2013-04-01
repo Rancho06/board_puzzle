@@ -62,8 +62,9 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   				pm=new PuzzleMove(it->first,it->second,move);
   				pm->h_=ph->compute(pm->b_->getTiles(),pm->b_->getSize());
   				openlist.push(pm);
+  				expansions_++;
   				closedlist.insert(pm->b_);
-  				expansions_++;	
+  					
   			}
   		}
   	}	
