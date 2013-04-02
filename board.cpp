@@ -165,7 +165,7 @@ bool Board::solved(){
 std::ostream& operator<<(std::ostream &os, const Board &b){
 	/**using a loop to determine the field width(setw)*/
 	int N=2;
-	while(pow(10,N-1)<=b.getSize()){
+	while(pow(10,N-1)<b.getSize()){
 		N++;
 	}
   	for(int i=0;i<b.getSize();i++){

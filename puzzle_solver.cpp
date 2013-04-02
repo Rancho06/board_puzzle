@@ -48,14 +48,12 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   		
   		std::map<int, Board*>::iterator it;
   		for(it=pmove.begin();it!=pmove.end();++it){
-  			//cout<<it->first<<endl<<*(it->second);
   			BoardSet::iterator it1;
   			bool exist=0;
   			for(it1=closedlist.begin();it1!=closedlist.end();it1++){
   				if(*(*it1)==*(it->second)){
   					exist=1;
-  				}
-  				
+  				}	
   			}
   			if(!exist){
   				
@@ -66,17 +64,17 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   				closedlist.insert(pm->b_);
   					
   			}
+  			else delete it->second;
   		}
   	}	
-  	vector<PuzzleMove*>::iterator it;
-  	for(it=garbage.begin();it!=garbage.end();++it){
-  		//delete[] (*it)->b_->getTiles();
-  		//delete (*it)->b_;
+  	vector<PuzzleMove*>::iterator it=garbage.begin();
+  	delete *it;
+  	for(++it;it!=garbage.end();++it){
+  		delete (*it)->b_;
   		delete (*it);
   	}
  	
  	while(!openlist.empty()){
- 		//delete[] openlist.top()->b_->getTiles();
  		delete openlist.top()->b_;
  		delete openlist.top();
  		openlist.pop();

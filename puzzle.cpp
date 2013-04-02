@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
 		do{
 			cout<<"Enter tile number to move or -1 for a cheat: ";
 			cin>>tile;
+			//check the input validation
 			if(!cin){
 				cout<<"What you entered is not an integer!\n";
 				cin.clear();
@@ -67,7 +68,7 @@ int main(int argc, char *argv[])
 		*/
 		else{
 			std::map<int,Board*> plist=b.potentialMoves();
-			
+			//Check whether the tile entered can be moved
 			if( plist.find(tile) != plist.end()){
 				b.move(tile);
 				cout<<b;
