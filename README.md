@@ -10,3 +10,13 @@ The grader should use the following procedure to compile and run the code:
 make
 ./puzzle size initMoves seed
 ```
+
+To generate Doxygen:
+Run this:
+sudo apt-get install doxygen
+doxygen -g config.txt
+doxygen config.txt
+
+The address of my Doxygen webpage is:
+file:///home/cs102/puzzle_shuzhou/html/index.html
+

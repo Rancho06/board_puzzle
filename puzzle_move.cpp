@@ -1,6 +1,8 @@
 #include "puzzle_move.h"
 
-// Constructor for starting Board of an A* search
+/** Constructor for starting Board of an A* search
+@param b The current state board to be copied
+*/
 PuzzleMove::PuzzleMove(Board &b){
 	b_=&b;
 	prev_=NULL;

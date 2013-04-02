@@ -9,7 +9,10 @@
 #include "puzzle_heur.h"
 #include "mylist.h"
 
-/**This class combines other classes together to solve the problem
+/**
+	This class combines other classes together to solve the problem
+	
+	@author Shu Zhou
 */
 class PuzzleSolver
 {
@@ -20,7 +23,9 @@ class PuzzleSolver
   */
   typedef std::set<Board *, BoardLessThan> BoardSet;
 
-  /// Constructor (makes a copy of the Board and stores it in _b
+  /** Constructor (makes a copy of the Board and stores it in _b
+  @param b The current state board to solve
+  */
   PuzzleSolver(const Board &b);
 
   /// Destructor
@@ -28,14 +33,20 @@ class PuzzleSolver
 
   /** Run the A* search returning -1 if no solution exists or
    *  the number of moves in the solution
+   @param ph A pointer to a PuzzleHeuristic object that can be used to compute h_ value
+   @return The number of steps it takes to solve the puzzle
   */
   int run(PuzzleHeuristic *ph);
 
-  /** Return the solution List */
-  	MyList<int>* getlist();
+  /** Return the solution List 
+  @return A MyList of the solution sequence for cheat
+  */
+  MyList<int>* getlist();
   
 
-  /** Return how many expansions were performed in the search */
+  /** Return how many expansions were performed in the search 
+  @return The number of expansions
+  */
    int getNumExpansions();
   
 

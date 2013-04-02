@@ -8,8 +8,15 @@
 using namespace std;
 
 /** The main function of the whole program to parse the commandline information 
- * it will call the move() function to move a tile or 
- * call the run() method to provide a cheat
+  it will call the move() function to move a tile or 
+  call the run() method to provide a cheat
+  @mainpage csci102 Programming Assignment #3
+  @section purpose Purpose/Overview
+  This assignment will allow a user to select the size of the game board, 
+  though we will require it to be square. Valid sizes are 4 (2x2), 9 (3x3), 16 (4x4), etc. 
+  Further, we will define the SOLVED gameboard to be as shown below with the blank tile at the upper-left corner.
+  @section requirements Requirements
+  The program requires users to select a valid tile to move or choose -1 for a cheat.
 */
 int main(int argc, char *argv[])
 {
@@ -83,7 +90,7 @@ int main(int argc, char *argv[])
 					delete it->second;
 				}
 				cout<<"The tile you entered can not be moved. Please choose another tile.\n\n";
-				continue;
+				continue;//Go back to the loop and ask for number again
 			}
 		}
 	}

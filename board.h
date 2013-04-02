@@ -5,10 +5,12 @@
 #include <map>
 #include <functional>
 
-/** Board Class is to create the board and do the basic operations to the board
- * such as move a tile or check whether the board is solved or compare the two boards 
- * using ==,<, or >.
-   
+/** 
+  Board Class is to create the board and do the basic operations to the board
+  such as move a tile or check whether the board is solved or compare the two boards 
+  using ==,<, or >.
+  
+  @author Shu Zhou 
 */
 class Board
 {

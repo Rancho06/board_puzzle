@@ -69,13 +69,18 @@ Board::Board()
  
 }
 
-/** Default destructor. provide documentation here */
+/** Default destructor. provide documentation here 
+@post the tiles_ pointer has been deallocated
+*/
 Board::~Board()
 {
   delete[] tiles_;	
 }
 
-/** Compare if one board is smaller than the other*/
+/** Compare if one board is smaller than the other
+@param rhs An Board object to compare with "this" Board object
+@return a boolean value whether "this" board is smaller than rhs
+*/
 bool Board::operator<(const Board& rhs) const
 {
   if(size_ < rhs.getSize()){
@@ -96,7 +101,9 @@ bool Board::operator<(const Board& rhs) const
   return val;
 }
 
-/** Copy constructor */
+/** Copy constructor 
+@param b The Board object to deep-copy from
+*/
 Board::Board(const Board &b){
 	this->size_=b.getSize();
 	tiles_=new int[size_];
@@ -107,7 +114,10 @@ Board::Board(const Board &b){
 
 }
 
-/** Another kind of "copy" constructor */
+/** Another kind of "copy" constructor 
+@param tiles An int pointer to deep-copy from
+@param size The size of the new board
+*/
 Board::Board(int *tiles, int size){
 	size_=size;
 	tiles_=new int[size_];
@@ -116,7 +126,10 @@ Board::Board(int *tiles, int size){
 	}
 }
 
-/** Swaps the blank with the specified tile */
+/** Swaps the blank with the specified tile 
+@param tile The number of the tile to be move
+@return void
+*/
 void Board::move(int tile){
 	int blankloc, tileloc;
 	for(int i=0;i<size_;i++){
@@ -127,7 +140,10 @@ void Board::move(int tile){
 	tiles_[tileloc]=0;
 }
 
-/** create a new board based on the potential move and return a pointer to that board.*/
+/** create a new board based on the potential move and return a pointer to that board.
+@param tile The number of the tile to move to create the resulting board
+@return A Pointer to the resulting board
+*/
 Board* Board::NewBoard(int tile){
 	Board* bd=new Board(*this);
 	bd->move(tile);
@@ -136,7 +152,9 @@ Board* Board::NewBoard(int tile){
 
 
 /** Generate potential moves and returns new boards
-   * Key=tile, Value=Ptr to corresponding Board */
+   *\\ Key=tile, Value=Ptr to corresponding Board
+@return A map where the key is the potential tile to move and the value is the pointer to the resulting board   
+ */
 std::map<int, Board*> Board::potentialMoves(){
 	std::map<int, Board*> list;
 	int blankloc;
@@ -153,7 +171,9 @@ std::map<int, Board*> Board::potentialMoves(){
 
 
 
-/** Returns true if the board is solved, false otherwise */
+/** Returns true if the board is solved, false otherwise 
+@return A boolean value to indicate whether the board is solved
+*/
 bool Board::solved(){
 	for(int i=0;i<size_;i++){
 		if(tiles_[i]!=i) return false;
@@ -161,7 +181,11 @@ bool Board::solved(){
 	return true;
 }
 
-/** Operators<<to output the entire board to the screen*/
+/** Operators<<to output the entire board to the screen
+@param os An ostream object to print out the board
+@param b The board object to be printed out
+@return A ostream object
+*/
 std::ostream& operator<<(std::ostream &os, const Board &b){
 	/**using a loop to determine the field width(setw)*/
 	int N=2;
@@ -176,7 +200,12 @@ std::ostream& operator<<(std::ostream &os, const Board &b){
 	os<<endl<<endl;
 	return os;
 }
-  
+ 
+/**
+This function is operator overloading to compare if two boards are idential
+@param rhs The board to be compared with "this"
+@return A boolean object indicating the result of comparison
+*/ 
 bool Board::operator!=(const Board& rhs) const{
 	if(size_ != rhs.getSize()){
     	return true;
@@ -190,18 +219,25 @@ bool Board::operator!=(const Board& rhs) const{
   	return val;
 }
 
-/** check if the two boards are exactly the same, which means every place has the same value*/  
+/** check if the two boards are exactly the same, which means every place has the same value
+@param rhs A board to be compared
+@return A boolean value indicating the comparison result
+*/  
 bool Board::operator==(const Board& rhs) const{
 	return !(this->operator!=(rhs));
 }
 
 /** Accessors*/
-/** return the pointer to the array of tiles of the board*/
+/** To return the pointer to the array of tiles of the board
+@return The pointer pointing to the parameter tiles_
+*/
 int* Board::getTiles() const{
 	return tiles_;
 }
 
-/** return the size of the array of the board*/
+/** return the size of the array of the board
+@return The pointer pointing to the parameter size_
+*/
 int Board::getSize() const{
 	return size_;
 }
