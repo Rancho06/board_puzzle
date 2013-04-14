@@ -51,4 +51,4 @@ private:
     QVector<GUITile*>* tiles;
 };
 
-#endif // GraphicsWindow_H
+#endif

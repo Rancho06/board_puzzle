@@ -15,8 +15,6 @@ MainWindow::MainWindow(QApplication* app):QMainWindow(){
 	fileMenu->addAction(q);
 	mb->addMenu(fileMenu);
 	
-	//QMenu *fileMenu=new QMenu(tr("File"));
-	//fileMenu->addAction("StartGame",)
 	InToolBar *toolbar=new InToolBar(this,app);
 	connect(q,SIGNAL(triggered()),toolbar,SLOT(quitGame()));
 	this->addToolBar(toolbar);
