@@ -1,6 +1,10 @@
 #include "intoolbar.h"
 #include "graphicswindow.h"
 #include <cmath>
+#include <iostream>
+#include "mylist.h"
+using namespace std;
+
 
 InToolBar::InToolBar(MainWindow* m_w,QApplication* q_a):QToolBar(){
 	mw=m_w;qa=q_a;
@@ -12,7 +16,7 @@ InToolBar::InToolBar(MainWindow* m_w,QApplication* q_a):QToolBar(){
 	this->addAction(QuitGameAction);
 	connect(QuitGameAction,SIGNAL(triggered()),this,SLOT(quitGame()));
 	
-	QAction *RunA=new QAction("Run A* Algorithm",this);
+	QAction *RunA=new QAction("Get Cheat",this);
 	this->addAction(RunA);
 	connect(RunA,SIGNAL(triggered()),this,SLOT(run()));
 
@@ -20,18 +24,22 @@ InToolBar::InToolBar(MainWindow* m_w,QApplication* q_a):QToolBar(){
 }
 
 void InToolBar::startGame(){
+
 	GraphicsWindow* gw=mw->getgraphwindow();
+	MyLayout *layout=mw->getlayout();
+	gw->setsize(layout->getsize());
+	gw->setnum(layout->getnum());
+	gw->setseed(layout->getseed());
 	int dim=sqrt(gw->getsize());
 	gw->setmyboard();
-	gw->getscreentiles()=new GUITile*[gw->getsize()];
 	for(int i=0;i<gw->getsize();i++){
-    	gw->getscreentiles()[i]=new GUITile(gw,i%dim,i/dim,50);
-    }
-    
-    for(int i=0;i<gw->getsize();i++){
-    	gw->getscene()->addItem(gw->getscreentiles()[i]);
-    	gw->getscene()->addItem(gw->getscreentiles()[i]->gettext());
-    }
+		GUITile* tile=new GUITile(gw,i%dim,i/dim,50);
+    		gw->getscreentiles()->push_back(tile);
+    		gw->getscene()->addItem(tile);
+    		gw->getscene()->addItem(tile->gettext());
+    	}
+ 
+ 
 }
 
 void InToolBar::quitGame(){
@@ -39,4 +47,18 @@ void InToolBar::quitGame(){
 }
 
 void InToolBar::run(){
+	QStringList* list;
+	ManhattanHeuristic* mh=new ManhattanHeuristic;
+	Board b=*(mw->getgraphwindow()->getboard());
+	PuzzleSolver ps(b);
+	ps.run(mh);
+	int size=ps.getlist()->size();
+	list=ps.getqstring();
+	list->push_front("Try the following sequence:");
+	mw->getlist()->insertItems(0,*list);
+	
+	
+
+
+
 }
