@@ -8,6 +8,8 @@
 #include "puzzle_move.h"
 #include "puzzle_heur.h"
 #include "mylist.h"
+#include <QString>
+#include <QStringList>
 
 /**
 	This class combines other classes together to solve the problem
@@ -36,18 +38,20 @@ class PuzzleSolver
    @param ph A pointer to a PuzzleHeuristic object that can be used to compute h_ value
    @return The number of steps it takes to solve the puzzle
   */
-  int run(PuzzleHeuristic *ph);
+  void run(PuzzleHeuristic *ph);
 
   /** Return the solution List 
   @return A MyList of the solution sequence for cheat
   */
   MyList<int>* getlist();
+  QStringList* getqstring(){return qstringlist;};
   
 
   /** Return how many expansions were performed in the search 
   @return The number of expansions
   */
-   int getNumExpansions();
+  int getNumExpansions();
+  
   
 
  private:
@@ -55,6 +59,7 @@ class PuzzleSolver
   int expansions_;
   //**** Declare a List to store your solutions sequence of tiles to move
   MyList<int> solutionlist;
+  QStringList* qstringlist;
   
 };
 
