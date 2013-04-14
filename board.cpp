@@ -131,7 +131,7 @@ Board::Board(int *tiles, int size){
 @return void
 */
 void Board::move(int tile){
-	int blankloc, tileloc;
+	int blankloc=0, tileloc=0;
 	for(int i=0;i<size_;i++){
 		if(tiles_[i]==0) blankloc=i;
 		if(tiles_[i]==tile) tileloc=i;
@@ -157,10 +157,13 @@ Board* Board::NewBoard(int tile){
  */
 std::map<int, Board*> Board::potentialMoves(){
 	std::map<int, Board*> list;
-	int blankloc;
+	int blankloc=0;
 	int dim=(int)sqrt(size_);
 	for(int i=0;i<size_;i++){
-		if(tiles_[i]==0) blankloc=i;
+		if(tiles_[i]==0){
+			blankloc=i;
+			break;
+		}
 	}
 	if(blankloc/dim>0) list[tiles_[blankloc-dim]]=this->NewBoard(tiles_[blankloc-dim]);
 	if(blankloc/dim<(dim-1)) list[tiles_[blankloc+dim]]=this->NewBoard(tiles_[blankloc+dim]);
@@ -240,5 +243,18 @@ int* Board::getTiles() const{
 */
 int Board::getSize() const{
 	return size_;
+}
+
+
+int Board::getblankloc() const{
+	int blank=0; 
+	for(int i=0;i<size_;i++){
+		if(tiles_[i]==0) {
+			blank=i;
+			break;
+		}
+	}
+	return blank;
+
 }
 

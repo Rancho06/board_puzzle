@@ -60,6 +60,7 @@ class Board
   // Accessors
   int* getTiles() const;
   int getSize() const;
+  int getblankloc() const;
   // Add any accessors
 
 

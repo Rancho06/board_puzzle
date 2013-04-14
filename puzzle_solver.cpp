@@ -10,6 +10,7 @@ using namespace std;
 /** constructor sets the initial expansions to 0 and copy the current board*/
 PuzzleSolver::PuzzleSolver(const Board &b):b_(b){
 	expansions_=0;
+	qstringlist=new QStringList;
 }
 
 /** Destuctor*/
@@ -21,7 +22,7 @@ PuzzleSolver::~PuzzleSolver(){
  @param ph A pointer to a PuzzleHeuristic object that can be used to compute h_ value
  @return The number of steps it takes to solve the puzzle
 */
-int PuzzleSolver::run(PuzzleHeuristic* ph){
+void PuzzleSolver::run(PuzzleHeuristic* ph){
 	//Declare a closedlist to store pointers pointing to boards
 	BoardSet closedlist;
 	//Declare a openlist to store pointers to PuzzleMove objects
@@ -34,16 +35,21 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   	openlist.push(pm);
   	closedlist.insert(pm->b_);
   	expansions_++;
+  	
   	while(!openlist.empty()){
   		PuzzleMove* move=openlist.top();
   		
   		openlist.pop();
   		garbage.push_back(move);
+  		
   		if(move->b_->solved()){
   			//trace back to get the solutionlist
   			do{
   				//add the tile number to the solutionlist
   				solutionlist.push_back(move->tileMove_);
+  				QString* qs=new QString;
+  				qs->setNum(move->tileMove_);
+  				qstringlist->push_front(*qs);
   				move=move->prev_;
   			}
   			while(move->prev_!=NULL);
@@ -51,10 +57,12 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
   			break;
   		}
   		//generate potential moves and resulting boards
+  		
   		std::map<int, Board*> pmove=move->b_->potentialMoves();
   		//check if the resulting boards have already existed in the closedlist
   		std::map<int, Board*>::iterator it;
   		for(it=pmove.begin();it!=pmove.end();++it){
+  		
   			BoardSet::iterator it1;
   			bool exist=0;
   			for(it1=closedlist.begin();it1!=closedlist.end();it1++){
@@ -89,7 +97,7 @@ int PuzzleSolver::run(PuzzleHeuristic* ph){
  		openlist.pop();
  	}
   
-	return solutionlist.size();
+	//return solutionlist.size();
 }
 
 
@@ -101,5 +109,8 @@ int PuzzleSolver::getNumExpansions()
 MyList<int>* PuzzleSolver::getlist(){
 	return &solutionlist;
 }
+
+
+
 
 
