@@ -1,7 +1,10 @@
 #include "graphicswindow.h"
 #include <cmath>
 
-
+/** 
+Constructor sets up the scene
+@param e_b A pointer tothe error Box
+*/
 GraphicsWindow::GraphicsWindow(QTextEdit* e_b){
 	eb=e_b;
 	scene = new QGraphicsScene();
@@ -16,28 +19,18 @@ GraphicsWindow::GraphicsWindow(QTextEdit* e_b){
    	this->setScene(scene);
 }
 
+/** set the board with provided inputs*/
 void GraphicsWindow::setmyboard(){
 	myboard=new Board(size,num,seed);
 
 }
 
-
+/** choosing manhattan as heuristic*/
 void GraphicsWindow::setmanhattan(){
 	ph=mh;
 }
 
+/** choosing outofplace as heuristic*/
 void GraphicsWindow::setoop(){
 	ph=oh; 
 }
-
-
-/*GraphicsWindow::~GraphicsWindow()
-{
-    timer->stop();
-    delete timer;
-   	for(unsigned int i=0;i<itemlist.size();i++){
-   		delete itemlist[i];
-   	}
-    delete scene;
-    delete view;
-}*/

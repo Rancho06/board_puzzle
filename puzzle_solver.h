@@ -44,6 +44,10 @@ class PuzzleSolver
   @return A MyList of the solution sequence for cheat
   */
   MyList<int>* getlist();
+  
+  /** return the QStringList object pointer
+  @return A pointer to a QStringList object containing the answers
+  */
   QStringList* getqstring(){return qstringlist;};
   
 

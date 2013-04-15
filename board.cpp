@@ -245,7 +245,9 @@ int Board::getSize() const{
 	return size_;
 }
 
-
+/** return the current location of the blank tile
+@return the current location of the blank tile
+*/
 int Board::getblankloc() const{
 	int blank=0; 
 	for(int i=0;i<size_;i++){

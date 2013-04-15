@@ -6,6 +6,10 @@
 #include <QWidget>
 
 class MainWindow;
+
+/** This class creates two Radio Buttons
+@author Shu Zhou
+*/
 class HLayout: public QWidget{
 Q_OBJECT
 	private:
@@ -16,7 +20,6 @@ Q_OBJECT
 	
 	public:
 	HLayout(MainWindow*);
-	void resetbutton();
 	
 	public slots:
 	void changemanhattan();

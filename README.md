@@ -11,12 +11,21 @@ make
 ./puzzle size initMoves seed
 ```
 
+To complie files:
+Run this:
+qmake -project
+then delete unneeded files from.pro file
+qmake
+make clean
+make
+
+
 To generate Doxygen:
 Run this:
 sudo apt-get install doxygen
 doxygen -g config.txt
 doxygen config.txt
 
-The address of my Doxygen webpage is:
-file:///home/cs102/puzzle_shuzhou/html/index.html
+
+
 
