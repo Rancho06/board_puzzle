@@ -3,10 +3,14 @@
 #include <QWidget>
 #include "graphicswindow.h"
 
+/**
+  This class creates three QLineEdit objects for users to input 
+  @author Shu Zhou
+*/
 class MyLayout : public QWidget{
 	Q_OBJECT
 	public:
-	MyLayout(GraphicsWindow*);
+	MyLayout();
 	int getsize();
 	int getnum();
 	int getseed();

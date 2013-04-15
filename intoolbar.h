@@ -9,10 +9,15 @@
 #include "puzzle_heur.h"
 #include "board.h"
 
+/**
+This class creates three actions in the tool bar to start, quit and run A*
+@author Shu Zhou
+*/
 class InToolBar: public QToolBar{
 Q_OBJECT
-private:
+private:/// A pointer to the main window
 	MainWindow* mw;
+	/// A pointer to the QApplication object
 	QApplication* qa;
 public:
 	InToolBar(MainWindow*,QApplication*);

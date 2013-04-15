@@ -1,6 +1,9 @@
 #include "mylayout.h"
 
-MyLayout::MyLayout(GraphicsWindow* gw):QWidget(){
+/**
+Constructor sets three QLineEdit objects
+*/
+MyLayout::MyLayout():QWidget(){
 	layout=new QFormLayout;
 	setLayout(layout);
 	sizeEdit=new QLineEdit();
@@ -12,13 +15,14 @@ MyLayout::MyLayout(GraphicsWindow* gw):QWidget(){
 	layout->addRow("Random Seed Value:",randomSeedEdit);
 }
 
+/** Delete the contents in the three QLineEdit objects*/
 void MyLayout::reset(){
 	sizeEdit->clear();
 	startMovesEdit->clear();
 	randomSeedEdit->clear();
 }
 
-
+/** @return The size of the board*/
 int MyLayout::getsize(){
     	bool good;
     	int result=sizeEdit->text().toInt(&good);
@@ -28,6 +32,8 @@ int MyLayout::getsize(){
     	}
     	return result;
     };
+    
+/** @return Initial moves of the board*/
 int MyLayout::getnum(){
     	bool good;
     	int num=startMovesEdit->text().toInt(&good);
@@ -36,6 +42,8 @@ int MyLayout::getnum(){
     	}
     	return num;
     };
+    
+/** @return Random Seed Number*/
 int MyLayout::getseed(){
     	bool good;
     	int seed=randomSeedEdit->text().toInt(&good);
