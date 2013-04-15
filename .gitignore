@@ -4,6 +4,8 @@
 *.o
 *.moc
 *.obj
+*.txt
+puzzle.cpp
 
 # Pre-Compiled Header Files
 *.gch
@@ -47,3 +49,18 @@ Desktop.ini
 .DS_Store
 .Trashes
 .Trash
+
+puzzle.cpp
+...
+.gitignore
+html/
+latex/
+moc_graphicswindow.cpp
+moc_guitile.cpp
+moc_hlayout.cpp
+moc_intoolbar.cpp
+moc_main_window.cpp
+moc_mylayout.cpp
+puzzle_shuzhou
+puzzle_shuzhou.pro
+tests/test1.cpp
