@@ -23,9 +23,9 @@ PuzzleSolver::~PuzzleSolver(){
  @return The number of steps it takes to solve the puzzle
 */
 void PuzzleSolver::run(PuzzleHeuristic* ph){
-	//Declare a closedlist to store pointers pointing to boards
-	BoardSet closedlist;
-	//Declare a openlist to store pointers to PuzzleMove objects
+	  //Declare a closedlist to store pointers pointing to boards
+	  BoardSet closedlist;
+	  //Declare a openlist to store pointers to PuzzleMove objects
   	PMMinList openlist;
   	//Declare a garbage list to store pointers popped from openlist
   	vector<PuzzleMove*> garbage;

@@ -19,41 +19,45 @@ using namespace std;
  */
 Board::Board(int size, int numInitMoves, int seed )
 {
-  size_ = size;
-  tiles_ = new int[size_];
-  int dim = static_cast<int>(sqrt(size_));
-  srand(seed);
-  for(int i=0; i < size_; i++){
-    tiles_[i] = i;
-  }
-  int blankLoc = 0;
-  for(int i=0; i < numInitMoves; i++){
-    int r = rand()%4;
-    int randNeighbor = -1;
-    if(r == 0){
-      int n = blankLoc - dim;
-      if(n >= 0){
-	randNeighbor = n;
-      }
+    size_ = size;
+    tiles_ = new int[size_];
+    int dim = static_cast<int>(sqrt(size_));
+    srand(seed);
+    for(int i=0; i < size_; i++){
+      tiles_[i] = i;
     }
-    else if(r == 1){
-      int w = blankLoc - 1;
-      if(blankLoc % dim != 0){
-	randNeighbor = w;
+    
+    int blankLoc = 0;
+    
+    for(int i=0; i < numInitMoves; i++){
+      int r = rand()%4;
+      int randNeighbor = -1;
+      
+      if(r == 0){
+        int n = blankLoc - dim;
+        if(n >= 0){
+	       randNeighbor = n;
+        }
       }
-    }
-    else if(r == 2){
-      int s = blankLoc + dim;
-      if(s  < size_){
-	randNeighbor = s;
+      else if(r == 1){
+        int w = blankLoc - 1;
+        if(blankLoc % dim != 0){
+	       randNeighbor = w;
+        }
       }
-    }
-    else {
-      int e = blankLoc + 1;
-      if(blankLoc % dim != dim-1){
-	randNeighbor = e;
+      else if(r == 2){
+        int s = blankLoc + dim;
+        if(s  < size_){
+	       randNeighbor = s;
+        }
       }
-    }
+      else {
+        int e = blankLoc + 1;
+        if(blankLoc % dim != dim-1){
+	       randNeighbor = e;
+        }
+      }
+
     if(randNeighbor > -1){
       tiles_[blankLoc] = tiles_[randNeighbor];
       tiles_[randNeighbor] = 0;
@@ -165,10 +169,14 @@ std::map<int, Board*> Board::potentialMoves(){
 			break;
 		}
 	}
-	if(blankloc/dim>0) list[tiles_[blankloc-dim]]=this->NewBoard(tiles_[blankloc-dim]);
-	if(blankloc/dim<(dim-1)) list[tiles_[blankloc+dim]]=this->NewBoard(tiles_[blankloc+dim]);
-	if(blankloc%dim>0) list[tiles_[blankloc-1]]=this->NewBoard(tiles_[blankloc-1]);
-	if(blankloc%dim<(dim-1)) list[tiles_[blankloc+1]]=this->NewBoard(tiles_[blankloc+1]);
+	if(blankloc/dim>0) 
+    list[tiles_[blankloc-dim]]=this->NewBoard(tiles_[blankloc-dim]);
+	if(blankloc/dim<(dim-1)) 
+    list[tiles_[blankloc+dim]]=this->NewBoard(tiles_[blankloc+dim]);
+	if(blankloc%dim>0) 
+    list[tiles_[blankloc-1]]=this->NewBoard(tiles_[blankloc-1]);
+	if(blankloc%dim<(dim-1)) 
+    list[tiles_[blankloc+1]]=this->NewBoard(tiles_[blankloc+1]);
 	return list;
 }
 
