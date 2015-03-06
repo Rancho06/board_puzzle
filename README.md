@@ -26,7 +26,3 @@ sudo apt-get install doxygen
 make clean
 doxygen -g config.txt
 doxygen config.txt
-
-
-
-
